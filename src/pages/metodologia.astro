@@ -1,0 +1,209 @@
+---
+import PageHeader from "@/components/elements/PageHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+	BookOpen,
+	Bot,
+	Check,
+	FileText,
+	GitBranch,
+	Hammer,
+	Layers,
+} from "@lucide/astro";
+
+const sddaPhases = [
+	{
+		icon: FileText,
+		title: "Entendemos tu negocio",
+		tagline: "Fase 1 · 3–5 días",
+		desc: "Documentamos actores, eventos y reglas de negocio en un Domain Model Document (DMD) antes de decidir cualquier cosa técnica. Tú lo apruebas antes de seguir.",
+		points: [
+			"DMD antes de cualquier decisión técnica",
+			"Actores, eventos, reglas de negocio",
+			"Tú apruebas antes de continuar",
+		],
+		direction: "left",
+	},
+	{
+		icon: Layers,
+		title: "Diseñamos la estructura",
+		tagline: "Fase 2 · 4–6 días",
+		desc: "Cada decisión de arquitectura queda en un Architecture Decision Record (ADR) — incluyendo las alternativas que descartamos y por qué. Nada se decide «porque sí».",
+		points: [
+			"ADR por cada decisión importante",
+			"Incluye alternativas descartadas",
+			"Trazabilidad completa de por qué",
+		],
+		direction: "right",
+	},
+	{
+		icon: GitBranch,
+		title: "Definimos qué hace cada parte",
+		tagline: "Fase 3 · 3–5 días",
+		desc: "Cada funcionalidad se documenta como Feature Spec en formato BDD (Behavior Driven Development): Dado que / Cuando / Entonces. Cubre el escenario principal y los casos borde. Tú firmas el alcance — esto es el contrato técnico del proyecto.",
+		points: [
+			"BDD: Dado que / Cuando / Entonces",
+			"Escenario principal + casos borde",
+			"Tú firmas el alcance",
+		],
+		direction: "left",
+	},
+	{
+		icon: Hammer,
+		title: "Construimos siguiendo el mapa",
+		tagline: "Fase 4 · iterativo",
+		desc: "La IA construye exactamente lo que la Feature Spec definió. Cada entrega se revisa contra esos criterios antes de aceptarse.",
+		points: [
+			"IA ejecuta, ingenieros deciden",
+			"Revisión contra Feature Spec",
+			"Aceptación por criterios objetivos",
+		],
+		direction: "right",
+	},
+	{
+		icon: BookOpen,
+		title: "Entregamos y te dejamos listo",
+		tagline: "Fase 5 · 3–4 días",
+		desc: "Validación final + documentación completa para que cualquier ingeniero, no solo nosotros, pueda operar y extender el sistema.",
+		points: [
+			"Validación final",
+			"Documentación operativa completa",
+			"Handoff a cualquier ingeniero",
+		],
+		direction: "left",
+	},
+];
+
+const aiRole = {
+	icon: Bot,
+	title: "El rol de la IA",
+	desc: "Usamos IA para construir más rápido — no para tomar decisiones. La IA ayuda a redactar documentos, escribir código y generar tests. Las decisiones sobre qué construir, cómo estructurarlo y si cumple con lo acordado las tomamos siempre los ingenieros. Nunca al revés.",
+	points: [
+		"IA redacta, ejecuta y testea",
+		"Ingenieros deciden qué y por qué",
+		"Nunca al revés",
+	],
+};
+
+const glossary = [
+	{
+		term: "DMD (Domain Model Document)",
+		definition:
+			"Documento que define los actores, eventos y reglas de negocio de tu sistema, antes de cualquier decisión técnica.",
+	},
+	{
+		term: "ADR (Architecture Decision Record)",
+		definition:
+			"Registro de cada decisión de arquitectura importante, incluyendo las alternativas descartadas y por qué.",
+	},
+	{
+		term: "Feature Spec",
+		definition:
+			"Especificación de una funcionalidad en lenguaje BDD — qué debe pasar en el escenario principal y en cada caso borde.",
+	},
+	{
+		term: "BDD (Behavior Driven Development)",
+		definition:
+			"Forma de escribir specs y tests en lenguaje que entienden tanto el negocio como los ingenieros.",
+	},
+];
+---
+
+<Layout
+  title="Spec Driven Development: metodología en 5 fases | GL Solutions Chile"
+  description="Cómo aplicamos Spec Driven Development en cada proyecto: DMD, ADR, Feature Spec en BDD, construcción con IA y handoff documentado. 5 fases, 3-5 días cada una."
+>
+  <section class="site-container my-12">
+    <PageHeader
+      title="Spec Driven Development: el mapa antes que el código"
+      description="SDD no es una metodología más. Es la diferencia entre un sistema que tu equipo puede explicar y uno que solo el dev original entiende. Esto es exactamente cómo se aplica en cada proyecto."
+    />
+  </section>
+
+  {sddaPhases.map((phase) => (
+    <section class="py-16 md:py-24 site-container">
+      <div class={`flex flex-col ${phase.direction === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
+        <div class="flex-1 min-w-0" data-aos={phase.direction === 'right' ? 'fade-left-sm' : 'fade-right-sm'} data-aos-once="true">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <phase.icon class="w-6 h-6 text-primary" />
+            </div>
+            <span class="text-xs font-medium uppercase tracking-wider text-primary/70">{phase.tagline}</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-brand mb-4">{phase.title}</h2>
+          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">{phase.desc}</p>
+          <ul class="space-y-3">
+            {phase.points.map((point) => (
+              <li class="flex items-start gap-2">
+                <Check class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <span class="text-sm text-neutral-600 dark:text-neutral-300">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex-1 min-w-0 w-full" data-aos={phase.direction === 'right' ? 'fade-right-sm' : 'fade-left-sm'} data-aos-delay="200" data-aos-once="true">
+          <div class="relative rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 h-[220px] md:h-[280px] overflow-hidden p-6 flex items-center justify-center">
+            <phase.icon class="w-24 h-24 text-primary/15" stroke-width={1.25} />
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="py-16 md:py-24 site-container">
+    <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16" data-aos="fade-up-xs" data-aos-once="true">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <aiRole.icon class="w-6 h-6 text-primary" />
+          </div>
+          <span class="text-xs font-medium uppercase tracking-wider text-primary/70">Cómo trabajamos</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-brand mb-4">{aiRole.title}</h2>
+        <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">{aiRole.desc}</p>
+        <ul class="space-y-3">
+          {aiRole.points.map((point) => (
+            <li class="flex items-start gap-2">
+              <Check class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+              <span class="text-sm text-neutral-600 dark:text-neutral-300">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
+
+  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-brand text-center mb-4">Glosario</h2>
+      <p class="text-center text-neutral-600 dark:text-neutral-300 mb-12">Los términos que usamos (y que vas a ver en cada entrega).</p>
+      <dl class="space-y-6">
+        {glossary.map((entry) => (
+          <div class="border-l-4 border-primary/30 pl-4">
+            <dt class="font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{entry.term}</dt>
+            <dd class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">{entry.definition}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
+
+  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-brand mb-4">¿Listo para empezar con el mapa antes que el código?</h2>
+      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
+        La primera conversación es de diagnóstico — sin compromiso, sin cotizar sin saber el alcance.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button url="mailto:hola@glsolutions.tech" type="fill" className="text-lg px-8 py-3">
+          Escríbenos para empezar
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>
