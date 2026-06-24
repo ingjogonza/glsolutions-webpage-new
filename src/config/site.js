@@ -14,7 +14,7 @@ export const siteConfig = {
 		campaign: "navigation",
 	},
 	meta: {
-		title: "GL Solutions — Spec Driven Development para Chile y Latinoamérica",
+		title: "GL Solutions Chile",
 		description:
 			"GL Solutions: Spec Driven Development para startups B2B SaaS y Fintech en Chile y Latinoamérica. Software que cualquier ingeniero puede entender desde el día uno.",
 		keywords:
