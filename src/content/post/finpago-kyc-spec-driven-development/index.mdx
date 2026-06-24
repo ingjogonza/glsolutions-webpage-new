@@ -1,0 +1,65 @@
+---
+title: "Plataforma Fintech KYC en 8 semanas: de caos a producción con Spec Driven Development"
+description: "Cómo GL Solutions construyó un sistema KYC completo para una startup Fintech seed usando SDD. 0 bugs críticos, 100% BDD, handoff en menos de 2 horas."
+publishDate: 2026-06-23
+tags: ["case-study", "fintech", "kyc", "spec-driven-development"]
+---
+
+## El problema inicial: 6 meses sin avance
+
+FinPago es una startup Fintech que cerró una ronda seed de USD 400K. El equipo fundador es fuerte en producto y negocio, pero sin CTO técnico de planta. Necesitaban un sistema KYC (Know Your Customer) para cumplir regulaciones locales antes de operar.
+
+Habían contratado a un freelancer senior local que prometió entregar en 6 semanas. A los 6 meses seguían sin un sistema funcional: sin documentación, sin tests automatizados, sin handoff posible, y con reguladores cuestionando la arquitectura.
+
+## Diagnóstico: qué estaba mal
+
+| Aspecto | Situación encontrada | Impacto |
+|---|---|---|
+| Flujo KYC | No documentado, 3 interpretaciones distintas en el equipo | Imposible probar completitud |
+| Estados de usuario | Parcialmente implementados, faltaban casos como "rechazado" o "apelación" | Régimen incompleto |
+| Integraciones externas | API de verificación sin reintentos ni manejo de errores | Fallos en producción garantizados |
+| Validaciones | Solo en el cliente — si se saltaban, se guardaba basura en BD | Datos inválidos en base de datos |
+| Auditoría | Sin logs de decisiones | Imposible cumplir compliance regulatorio |
+
+El problema no era falta de código. El código existía. El problema era que nadie sabía qué debía hacer exactamente el sistema.
+
+## La solución: Spec Driven Development en 8 semanas
+
+Antes de tocar el código del freelancer, documentamos exactamente cómo debe funcionar un sistema KYC. Luego reescribimos el código de cero siguiendo esa spec — 5 fases, USD 18.000 fijo, pagos ligados a hitos (40% al firmar, 30% al firmar la Feature Spec, 30% a la entrega).
+
+## El escenario principal, documentado antes de escribir código
+
+```text
+DADO QUE  usuario con estado KYC 'pendiente'
+          ha completado el formulario de datos personales
+          y ha subido imagen de cédula con ambas caras visibles
+CUANDO    el verificador externo devuelve score: 87
+          y los datos extraídos coinciden con los declarados
+ENTONCES  el perfil KYC cambia a estado 'aprobado' automáticamente
+          y el usuario recibe notificación por email en menos de 60 segundos
+          y el evento kyc.approved es publicado al bus con timestamp
+          y el usuario queda habilitado para realizar transacciones
+```
+
+## Casos borde que documentamos (antes de que rompieran producción)
+
+- RUT del documento ya registrado en otro usuario → alerta inmediata a compliance.
+- El verificador externo confirma dos veces al mismo usuario → el sistema reconoce el duplicado y lo ignora (idempotency key).
+- Variaciones de tilde en el nombre ("José" vs "Jose") → el sistema normaliza antes de comparar.
+
+## Resultados: antes vs después
+
+| Aspecto | Antes (6 meses) | Con SDD (8 semanas) |
+|---|---|---|
+| Documentación | Ninguna | Completa: spec, arquitectura, ADRs, runbooks |
+| Tests | Manuales, inconsistentes | BDD automatizados, 100% coverage |
+| Auditoría | No auditable, regulador rechazaba | Completamente auditable |
+| Onboarding de un nuevo ingeniero | Imposible | Menos de 2 horas |
+| Bugs en producción (primeros 3 meses) | ~2 por semana | 0 |
+
+> "La verdadera diferencia no fue la velocidad. Fueron los 6 meses previos donde nadie sabía qué estaba pasando. Con GL Solutions, al final de la Fase 3 teníamos claridad completa — y no porque tuviera que aprender a programar, sino porque todo estaba documentado en lenguaje de negocio."
+> — CEO de FinPago
+
+## ¿Tu startup tiene un problema similar?
+
+Equipo sin documentación, código que nadie entiende, imposible escalar sin el dev original. Esto se resuelve con Spec Driven Development. Escríbenos a hola@glsolutions.tech.
