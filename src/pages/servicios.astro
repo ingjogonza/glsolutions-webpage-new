@@ -1,0 +1,327 @@
+---
+import PageHeader from "@/components/elements/PageHeader.astro";
+import AccordionItem from "@/components/ui/AccordionItem.astro";
+import Button from "@/components/ui/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowRight, Check, X } from "@lucide/astro";
+
+const serviciosFijos = [
+	{
+		name: "Ejecución",
+		tagline: "De cero a producto terminado",
+		desc: "Construimos tu producto de principio a fin, desde el primer documento hasta la entrega final. Precio fijo definido antes de empezar.",
+		price: "USD 12.000–32.000",
+		duration: "4–10 semanas",
+		icon: "rocket",
+	},
+	{
+		name: "Rescate",
+		tagline: "Sistema heredado a orden",
+		desc: "Auditamos un sistema que ya existe pero nadie entiende, identificamos qué está mal y por qué, y lo dejamos ordenado y documentado.",
+		price: "USD 3.500–22.000",
+		duration: "Duración fija según diagnóstico",
+		icon: "wrench",
+	},
+	{
+		name: "Automatización",
+		tagline: "Procesos manuales a automatizar",
+		desc: "Mapeamos un proceso manual, lo automatizamos (N8N/Make, bots, integraciones API, agentes IA) y lo dejamos documentado.",
+		price: "USD 1.500–12.000",
+		duration: "1–6 semanas",
+		icon: "cog",
+	},
+];
+
+const serviciosRecurrentes = [
+	{
+		name: "Consultoría",
+		tagline: "Criterio técnico continuo",
+		desc: "Acompañamos a tu equipo técnico con revisión de arquitectura y criterio técnico continuo.",
+		price: "USD 1.800–4.200/mes",
+		duration: "Mínimo 3 meses",
+		icon: "compass",
+	},
+	{
+		name: "CTO Fraccionado",
+		tagline: "Tu cabeza técnica sin contratarlo de planta",
+		desc: "Decisiones de arquitectura, roadmap técnico, supervisión de desarrollo.",
+		price: "USD 2.800–11.000/mes",
+		duration: "Mínimo 3 meses",
+		icon: "compass",
+	},
+];
+
+const comparisonRows = [
+	{
+		feature: "Precio",
+		values: [
+			"USD 12.000–32.000",
+			"USD 3.500–22.000",
+			"USD 1.500–12.000",
+			"USD 1.800–4.200/mes",
+			"USD 2.800–11.000/mes",
+		],
+	},
+	{
+		feature: "Duración",
+		values: [
+			"4–10 semanas",
+			"Según diagnóstico",
+			"1–6 semanas",
+			"Mínimo 3 meses",
+			"Mínimo 3 meses",
+		],
+	},
+	{
+		feature: "Para quién es",
+		values: [
+			"Producto nuevo a medida",
+			"Sistema heredado a ordenar",
+			"Procesos manuales a automatizar",
+			"Equipo técnico con CTO parcial",
+			"Startup sin CTO de planta",
+		],
+	},
+	{
+		feature: "Incluye documentación completa",
+		values: [true, true, true, true, true],
+	},
+	{
+		feature: "Requiere equipo técnico propio del cliente",
+		values: [false, false, false, true, true],
+	},
+];
+
+const faqItems = [
+	{
+		question: "¿Por qué no dan precio fijo en todos los servicios?",
+		answer:
+			"Porque Consultoría y CTO Fraccionado son acompañamiento continuo, no un proyecto con fin definido — el valor está en la disponibilidad mensual, no en un entregable único.",
+	},
+	{
+		question: "¿Cotizan sin reunión previa?",
+		answer:
+			"No. El precio final depende del alcance real, y eso solo se define en una primera conversación de diagnóstico.",
+	},
+	{
+		question: "¿Trabajan con proyectos de menos de 4 semanas?",
+		answer:
+			"No es nuestro foco. SDD requiere el tiempo mínimo para documentar antes de construir — proyectos muy cortos no alcanzan a justificar ese proceso.",
+	},
+	{
+		question: "¿Son la opción más económica del mercado?",
+		answer:
+			"No, y no buscamos serlo. Cobramos por evitar la deuda técnica invisible que un precio más bajo normalmente esconde.",
+	},
+];
+
+const serviceNames = [
+	"Ejecución",
+	"Rescate",
+	"Automatización",
+	"Consultoría",
+	"CTO Fraccionado",
+];
+---
+
+<Layout
+  title="Servicios de consultoría de software y Spec Driven Development | GL Solutions"
+  description="5 líneas de servicio: Ejecución, Rescate, Automatización, Consultoría y CTO Fraccionado. Rango USD 1.500–32.000. Escríbenos para cotizar."
+>
+  <section class="site-container my-12">
+    <PageHeader
+      title="Servicios"
+      description="5 líneas de trabajo. Cada una con alcance, precio y duración claros antes de empezar."
+    />
+  </section>
+
+  <section class="site-container mb-12" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="flex justify-center" role="tablist" aria-label="Grupos de servicios">
+      <div class="inline-flex rounded-xl border border-primary/20 dark:border-neutral-700 p-1 bg-bg-secondary dark:bg-bg-secondary-dark">
+        <button
+          type="button"
+          role="tab"
+          id="tab-fijos"
+          aria-selected="true"
+          aria-controls="panel-fijos"
+          class="service-tab px-5 py-2 text-sm font-medium rounded-lg transition-colors bg-primary text-white"
+        >
+          Proyectos de alcance fijo
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-recurrentes"
+          aria-selected="false"
+          aria-controls="panel-recurrentes"
+          class="service-tab px-5 py-2 text-sm font-medium rounded-lg transition-colors text-neutral-600 dark:text-neutral-300"
+        >
+          Servicios recurrentes
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="panel-fijos"
+    role="tabpanel"
+    aria-labelledby="tab-fijos"
+    class="site-container pb-16"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {serviciosFijos.map((s, i) => (
+        <article
+          class="relative p-6 md:p-8 rounded-2xl border border-primary/10 dark:border-neutral-700 bg-bg-secondary dark:bg-bg-secondary-dark"
+          data-aos="fade-up-sm"
+          data-aos-delay={i * 100}
+          data-aos-once="true"
+        >
+          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{s.name}</h3>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4 italic">{s.tagline}</p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6 leading-relaxed">{s.desc}</p>
+          <div class="mb-6 pb-6 border-b border-dashed border-neutral-200 dark:border-neutral-700">
+            <div class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-1">{s.price}</div>
+            <div class="text-xs text-neutral-500 dark:text-neutral-400">{s.duration}</div>
+          </div>
+          <Button url="mailto:hola@glsolutions.tech" type="fill" className="w-full justify-center">
+            Escríbenos para cotizar <ArrowRight size={16} />
+          </Button>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section
+    id="panel-recurrentes"
+    role="tabpanel"
+    aria-labelledby="tab-recurrentes"
+    class="site-container pb-16"
+    hidden
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      {serviciosRecurrentes.map((s, i) => (
+        <article
+          class="relative p-6 md:p-8 rounded-2xl border border-primary/10 dark:border-neutral-700 bg-bg-secondary dark:bg-bg-secondary-dark"
+          data-aos="fade-up-sm"
+          data-aos-delay={i * 100}
+          data-aos-once="true"
+        >
+          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-1">{s.name}</h3>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4 italic">{s.tagline}</p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6 leading-relaxed">{s.desc}</p>
+          <div class="mb-6 pb-6 border-b border-dashed border-neutral-200 dark:border-neutral-700">
+            <div class="text-2xl font-brand text-neutral-800 dark:text-neutral-100 mb-1">{s.price}</div>
+            <div class="text-xs text-neutral-500 dark:text-neutral-400">{s.duration}</div>
+          </div>
+          <Button url="mailto:hola@glsolutions.tech" type="fill" className="w-full justify-center">
+            Escríbenos para cotizar <ArrowRight size={16} />
+          </Button>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <p class="text-center text-xs text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto px-4 mb-16 italic">
+    Los rangos son orientativos. El precio final depende del alcance definido en la primera conversación. No cotizamos sin haber hecho el diagnóstico.
+  </p>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
+
+  <section class="site-container py-16 md:py-24" data-aos="fade-up-xs" data-aos-once="true">
+    <h2 class="text-3xl font-brand text-center mb-8">Comparar servicios</h2>
+    <div class="max-w-6xl mx-auto overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-dashed border-neutral-200 dark:border-neutral-700">
+            <th class="text-left py-4 pr-8 text-sm font-medium text-neutral-500">Característica</th>
+            {serviceNames.map((name) => (
+              <th class="text-center py-4 px-4 text-sm font-medium text-neutral-500">{name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {comparisonRows.map((row) => (
+            <tr class="border-b border-dashed border-neutral-100 dark:border-neutral-800">
+              <td class="py-4 pr-8 text-sm text-neutral-700 dark:text-neutral-300 font-medium">{row.feature}</td>
+              {row.values.map((val: string | boolean) => (
+                <td class="text-center py-4 px-4">
+                  {typeof val === 'boolean' ? (
+                    val ? (
+                      <Check class="w-4 h-4 text-primary mx-auto" />
+                    ) : (
+                      <X class="w-4 h-4 text-neutral-300 dark:text-neutral-600 mx-auto" />
+                    )
+                  ) : (
+                    <span class="text-sm text-neutral-600 dark:text-neutral-300">{val}</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
+
+  <section class="py-16 md:py-24 site-container">
+    <h2 class="text-3xl font-brand text-center mb-8">Preguntas frecuentes</h2>
+    <div class="max-w-2xl mx-auto" data-aos="fade-up-xs" data-aos-once="true">
+      {faqItems.map((item, index) => (
+        <AccordionItem question={item.question} answer={item.answer} index={index} />
+      ))}
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-brand mb-4">¿No estás seguro cuál encaja?</h2>
+      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
+        La primera conversación es para eso. Diagnóstico sin compromiso.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button url="mailto:hola@glsolutions.tech" type="fill" className="text-lg px-8 py-3">
+          Escríbenos para empezar <ArrowRight size={18} />
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function initServiceTabs() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('.service-tab');
+    const panels = document.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+    if (tabs.length === 0) return;
+
+    function activate(tabId: string) {
+      tabs.forEach((t) => {
+        const isActive = t.id === tabId;
+        t.setAttribute('aria-selected', String(isActive));
+        if (isActive) {
+          t.classList.add('bg-primary', 'text-white');
+          t.classList.remove('text-neutral-600', 'dark:text-neutral-300');
+        } else {
+          t.classList.remove('bg-primary', 'text-white');
+          t.classList.add('text-neutral-600', 'dark:text-neutral-300');
+        }
+      });
+      panels.forEach((p) => {
+        const isActive = p.id === `panel-${tabId.replace('tab-', '')}`;
+        if (isActive) {
+          p.removeAttribute('hidden');
+        } else {
+          p.setAttribute('hidden', '');
+        }
+      });
+    }
+
+    tabs.forEach((t) => {
+      t.addEventListener('click', () => activate(t.id));
+    });
+  }
+
+  initServiceTabs();
+  document.addEventListener('astro:page-load', initServiceTabs);
+</script>
