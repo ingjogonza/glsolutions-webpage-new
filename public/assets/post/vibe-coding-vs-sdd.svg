@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spec Driven Development vs Vibe Coding cover">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8530A"/>
+      <stop offset="100%" stop-color="#B83D08"/>
+    </linearGradient>
+    <pattern id="vlines" width="60" height="60" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#vlines)"/>
+  <g transform="translate(150, 200)" opacity="0.85">
+    <rect x="0" y="0" width="200" height="14" rx="3" fill="rgba(255,255,255,0.30)"/>
+    <rect x="0" y="30" width="160" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="55" width="180" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="80" width="140" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="115" width="180" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="140" width="120" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="180" width="200" height="14" rx="3" fill="rgba(255,255,255,0.30)"/>
+    <rect x="0" y="210" width="160" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="235" width="180" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+    <rect x="0" y="260" width="140" height="10" rx="2" fill="rgba(255,255,255,0.20)"/>
+  </g>
+  <text x="600" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="180" font-weight="800" fill="rgba(255,255,255,0.18)" text-anchor="middle" dominant-baseline="middle" letter-spacing="20">SDD</text>
+  <text x="600" y="600" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="500" fill="rgba(255,255,255,0.95)" text-anchor="middle" dominant-baseline="middle" letter-spacing="6">VS VIBE CODING</text>
+  <text x="600" y="650" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400" fill="rgba(255,255,255,0.65)" text-anchor="middle" dominant-baseline="middle" letter-spacing="3">POR QUÉ TU STARTUP NECESITA UN MAPA</text>
+</svg>
