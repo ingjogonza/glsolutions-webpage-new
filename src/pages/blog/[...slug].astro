@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import Toc from "@/components/widgets/Toc.astro";
 import PostLayout from "@/layouts/PostLayout.astro";
-import Toc from '@/components/widgets/Toc.astro';
 
 // SSG 模式下的动态路由需要使用 getStaticPaths()
 // 来告诉 Astro 在构建时生成哪些页面
@@ -32,7 +32,7 @@ if (!entry) {
 }
 
 const { Content, headings } = await render(entry);
-const filtered = headings.filter(h => h.depth <= 2);
+const filtered = headings.filter((h) => h.depth <= 2);
 ---
 
 <PostLayout title={entry.data.title} description={entry.data.description}>

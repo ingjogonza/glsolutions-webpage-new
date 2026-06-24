@@ -1,68 +1,66 @@
 [
 	{
-        "id": 1,
+		"id": 1,
 		"name": "Github",
-        "username": "ricocc",
+		"username": "ricocc",
 		"image": "/assets/social/social-github.jpg",
 		"url": "https://github.com/ricocc/"
 	},
 
 	{
-        "id": 2,
+		"id": 2,
 		"name": "Xiaohongshu",
-        "username": "ricouii",
+		"username": "ricouii",
 		"image": "/assets/social/social-xiaohongshu.jpg",
 		"url": "https://www.xiaohongshu.com/user/profile/5f2b6903000000000101f51f"
 	},
 
-    {
-        "id": 3,
+	{
+		"id": 3,
 		"name": "Twitter",
-        "username": "ricouii",
+		"username": "ricouii",
 		"image": "/assets/social/social-twitter.jpg",
 		"url": "https://x.com/ricouii"
 	},
 
-    {
-        "id": 4,
+	{
+		"id": 4,
 		"name": "Gumroad",
-        "username": "ricoui",
+		"username": "ricoui",
 		"image": "/assets/social/social-gumroad.jpg",
 		"url": "https://ricoui.gumroad.com/"
 	},
 
-    {
-        "id": 5,
+	{
+		"id": 5,
 		"name": "Behance",
-        "username": "ricoui",
+		"username": "ricoui",
 		"image": "/assets/social/social-behance.jpg",
 		"url": "https://www.behance.net/ricoui"
 	},
 
-    {
-        "id": 6,
+	{
+		"id": 6,
 		"name": "figma",
-        "username": "ricocc",
+		"username": "ricocc",
 		"image": "/assets/social/social-figma.jpg",
 		"url": "https://www.figma.com/@ricocc",
-        "isShow": false
+		"isShow": false
 	},
 
-    {
-        "id": 7,
+	{
+		"id": 7,
 		"name": "Dribbble",
-        "username": "ricoui",
+		"username": "ricoui",
 		"image": "/assets/social/social-dribbble.jpg",
 		"url": "https://dribbble.com/ricoui"
 	},
 
-    {
-        "id": 8,
+	{
+		"id": 8,
 		"name": "Email",
-        "username": "ricocc",
+		"username": "ricocc",
 		"image": "/assets/social/social-email.jpg",
 		"url": "mailto:ricocc@qq.com"
 	}
-
-
 ]

@@ -1,30 +1,71 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import PricingSection from "@/components/sections/Pricing.astro";
 import AccordionItem from "@/components/ui/AccordionItem.astro";
 import Button from "@/components/ui/Button.astro";
 import { siteConfig } from "@/config/site";
-import { Check, X, ArrowRight } from "@lucide/astro";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowRight, Check, X } from "@lucide/astro";
 
 const comparisonFeatures = [
-  { name: "Projects", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
-  { name: "Page templates", free: "Basic", pro: "Full", enterprise: "Full + Custom" },
-  { name: "Components", free: "Core", pro: "Full library", enterprise: "Full + Custom" },
-  { name: "Customization", free: "Limited", pro: "Full", enterprise: "Advanced" },
-  { name: "Animations", free: "Basic AOS", pro: "Full motion.js", enterprise: "Full + Custom" },
-  { name: "Support", free: "Community", pro: "Email (1 biz day)", enterprise: "Priority (same day)" },
-  { name: "Custom domain", free: false, pro: true, enterprise: true },
-  { name: "Team seats", free: "1", pro: "3", enterprise: "10+" },
-  { name: "SSO + audit log", free: false, pro: false, enterprise: true },
-  { name: "SLA", free: false, pro: false, enterprise: "99.9%" },
+	{ name: "Projects", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
+	{
+		name: "Page templates",
+		free: "Basic",
+		pro: "Full",
+		enterprise: "Full + Custom",
+	},
+	{
+		name: "Components",
+		free: "Core",
+		pro: "Full library",
+		enterprise: "Full + Custom",
+	},
+	{
+		name: "Customization",
+		free: "Limited",
+		pro: "Full",
+		enterprise: "Advanced",
+	},
+	{
+		name: "Animations",
+		free: "Basic AOS",
+		pro: "Full motion.js",
+		enterprise: "Full + Custom",
+	},
+	{
+		name: "Support",
+		free: "Community",
+		pro: "Email (1 biz day)",
+		enterprise: "Priority (same day)",
+	},
+	{ name: "Custom domain", free: false, pro: true, enterprise: true },
+	{ name: "Team seats", free: "1", pro: "3", enterprise: "10+" },
+	{ name: "SSO + audit log", free: false, pro: false, enterprise: true },
+	{ name: "SLA", free: false, pro: false, enterprise: "99.9%" },
 ];
 
 const faqItems = [
-  { question: "Is there a free trial on Pro?", answer: "Yes — Pro includes a 7-day free trial. No credit card required to start; we'll only ask for billing details when the trial ends." },
-  { question: "What's your refund policy?", answer: "14-day money-back guarantee on all paid plans, no questions asked. Email hello@ricoui.com within 14 days of the charge and we'll process the refund within 2 business days." },
-  { question: "Can I upgrade or downgrade later?", answer: "Anytime. Upgrades take effect immediately and we prorate the difference. Downgrades take effect at the end of the current billing period, so you keep paid features until then." },
-  { question: "How does team billing work?", answer: "Pro includes 3 seats and Enterprise starts at 10 seats. Additional seats are $9/seat/month on Pro and $19/seat/month on Enterprise, billed on the same cycle as your main subscription." },
+	{
+		question: "Is there a free trial on Pro?",
+		answer:
+			"Yes — Pro includes a 7-day free trial. No credit card required to start; we'll only ask for billing details when the trial ends.",
+	},
+	{
+		question: "What's your refund policy?",
+		answer:
+			"14-day money-back guarantee on all paid plans, no questions asked. Email hello@ricoui.com within 14 days of the charge and we'll process the refund within 2 business days.",
+	},
+	{
+		question: "Can I upgrade or downgrade later?",
+		answer:
+			"Anytime. Upgrades take effect immediately and we prorate the difference. Downgrades take effect at the end of the current billing period, so you keep paid features until then.",
+	},
+	{
+		question: "How does team billing work?",
+		answer:
+			"Pro includes 3 seats and Enterprise starts at 10 seats. Additional seats are $9/seat/month on Pro and $19/seat/month on Enterprise, billed on the same cycle as your main subscription.",
+	},
 ];
 ---
 

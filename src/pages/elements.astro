@@ -1,100 +1,154 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
-import Button from "@/components/ui/Button.astro";
-import Badge from "@/components/ui/Badge.astro";
-import AccordionItem from "@/components/ui/AccordionItem.astro";
-import PricingToggle from "@/components/ui/PricingToggle.astro";
-import AnimatedText from "@/components/ui/AnimatedText.astro";
 import SectionHeader from "@/components/elements/SectionHeader.astro";
+import AccordionItem from "@/components/ui/AccordionItem.astro";
+import AnimatedText from "@/components/ui/AnimatedText.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Button from "@/components/ui/Button.astro";
+import PricingToggle from "@/components/ui/PricingToggle.astro";
+import Layout from "@/layouts/Layout.astro";
 import {
-  ArrowRight, Mail, Check, X, Zap, Sparkles, Palette, Code, Globe, Shield,
-  Rocket, Bot, ChartNoAxesColumn, PenTool, Monitor, Smartphone, GitFork, Layers,
-  FileText, LayoutDashboard, Copy, Wrench, Menu, ChevronRight, ChevronLeft,
-  ChevronDown, ExternalLink, Sun, Moon, Search, Download, Grid3x3, List,
-  Rss, Lock, CircleAlert, CircleCheck, Info, TriangleAlert
+	ArrowRight,
+	Bot,
+	ChartNoAxesColumn,
+	Check,
+	ChevronDown,
+	ChevronLeft,
+	ChevronRight,
+	CircleAlert,
+	CircleCheck,
+	Code,
+	Copy,
+	Download,
+	ExternalLink,
+	FileText,
+	GitFork,
+	Globe,
+	Grid3x3,
+	Info,
+	Layers,
+	LayoutDashboard,
+	List,
+	Lock,
+	Mail,
+	Menu,
+	Monitor,
+	Moon,
+	Palette,
+	PenTool,
+	Rocket,
+	Rss,
+	Search,
+	Shield,
+	Smartphone,
+	Sparkles,
+	Sun,
+	TriangleAlert,
+	Wrench,
+	X,
+	Zap,
 } from "@lucide/astro";
 
 const colorPalette = [
-  { name: "Primary Blue", value: "#2d6dc3", token: "--color-primary" },
-  { name: "Primary Strong", value: "#0066ff", token: "--color-primary-strong" },
-  { name: "Primary Light", value: "#8fb9ff", token: "--color-primary-light" },
-  { name: "Accent Gold", value: "#fad13b", token: "--color-accent" },
+	{ name: "Primary Blue", value: "#2d6dc3", token: "--color-primary" },
+	{ name: "Primary Strong", value: "#0066ff", token: "--color-primary-strong" },
+	{ name: "Primary Light", value: "#8fb9ff", token: "--color-primary-light" },
+	{ name: "Accent Gold", value: "#fad13b", token: "--color-accent" },
 ];
 
 const neutralScale = [
-  { name: "50", value: "#f7f9fc" },
-  { name: "100", value: "#edf1f8" },
-  { name: "200", value: "#dfe4ed" },
-  { name: "300", value: "#c5cedb" },
-  { name: "400", value: "#92a1b7" },
-  { name: "500", value: "#677487" },
-  { name: "600", value: "#4f5a6d" },
-  { name: "700", value: "#3f4a5a" },
-  { name: "800", value: "#2c3542" },
-  { name: "900", value: "#19222f" },
-  { name: "950", value: "#10161f" },
+	{ name: "50", value: "#f7f9fc" },
+	{ name: "100", value: "#edf1f8" },
+	{ name: "200", value: "#dfe4ed" },
+	{ name: "300", value: "#c5cedb" },
+	{ name: "400", value: "#92a1b7" },
+	{ name: "500", value: "#677487" },
+	{ name: "600", value: "#4f5a6d" },
+	{ name: "700", value: "#3f4a5a" },
+	{ name: "800", value: "#2c3542" },
+	{ name: "900", value: "#19222f" },
+	{ name: "950", value: "#10161f" },
 ];
 
 const bgColors = [
-  { name: "BG Primary", value: "#fdfaf5", token: "--color-bg-primary" },
-  { name: "BG Secondary", value: "#ffffff", token: "--color-bg-secondary" },
-  { name: "BG Primary Light", value: "#faf9f5", token: "--color-bg-primary-light" },
-  { name: "BG Primary Dark", value: "#0b1220", token: "--color-bg-primary-dark" },
-  { name: "BG Secondary Dark", value: "#0f1b2d", token: "--color-bg-secondary-dark" },
+	{ name: "BG Primary", value: "#fdfaf5", token: "--color-bg-primary" },
+	{ name: "BG Secondary", value: "#ffffff", token: "--color-bg-secondary" },
+	{
+		name: "BG Primary Light",
+		value: "#faf9f5",
+		token: "--color-bg-primary-light",
+	},
+	{
+		name: "BG Primary Dark",
+		value: "#0b1220",
+		token: "--color-bg-primary-dark",
+	},
+	{
+		name: "BG Secondary Dark",
+		value: "#0f1b2d",
+		token: "--color-bg-secondary-dark",
+	},
 ];
 
 const textColors = [
-  { name: "Text Primary", value: "#2d6dc3", token: "--color-text-primary" },
-  { name: "Text Secondary", value: "#3f4a5a", token: "--color-text-secondary" },
-  { name: "Text Tertiary", value: "#7a6550", token: "--color-text-tertiary" },
+	{ name: "Text Primary", value: "#2d6dc3", token: "--color-text-primary" },
+	{ name: "Text Secondary", value: "#3f4a5a", token: "--color-text-secondary" },
+	{ name: "Text Tertiary", value: "#7a6550", token: "--color-text-tertiary" },
 ];
 
 const icons = [
-  { Icon: Menu, name: "Menu", usage: "Mobile nav" },
-  { Icon: X, name: "X", usage: "Close" },
-  { Icon: ChevronRight, name: "ChevronRight", usage: "Breadcrumbs" },
-  { Icon: ChevronLeft, name: "ChevronLeft", usage: "Pagination" },
-  { Icon: ChevronDown, name: "ChevronDown", usage: "Dropdowns" },
-  { Icon: ArrowRight, name: "ArrowRight", usage: "CTA buttons" },
-  { Icon: ExternalLink, name: "ExternalLink", usage: "External links" },
-  { Icon: Sun, name: "Sun", usage: "Light mode" },
-  { Icon: Moon, name: "Moon", usage: "Dark mode" },
-  { Icon: Mail, name: "Mail", usage: "Contact" },
-  { Icon: Search, name: "Search", usage: "Search" },
-  { Icon: Download, name: "Download", usage: "Downloads" },
-  { Icon: Copy, name: "Copy", usage: "Copy text" },
-  { Icon: Check, name: "Check", usage: "Confirm" },
-  { Icon: FileText, name: "FileText", usage: "Blog/Docs" },
-  { Icon: LayoutDashboard, name: "Layout", usage: "Page layout" },
-  { Icon: Layers, name: "Layers", usage: "Sections" },
-  { Icon: Grid3x3, name: "Grid", usage: "Grid view" },
-  { Icon: List, name: "List", usage: "List view" },
-  { Icon: GitFork, name: "GitFork", usage: "GitHub link" },
-  { Icon: Rss, name: "Rss", usage: "RSS feed" },
-  { Icon: Zap, name: "Zap", usage: "Performance" },
-  { Icon: Sparkles, name: "Sparkles", usage: "Animations" },
-  { Icon: Palette, name: "Palette", usage: "Customize" },
-  { Icon: Code, name: "Code", usage: "Development" },
-  { Icon: Globe, name: "Globe", usage: "Web" },
-  { Icon: Shield, name: "Shield", usage: "Security" },
-  { Icon: Lock, name: "Lock", usage: "Auth" },
-  { Icon: Rocket, name: "Rocket", usage: "Launch" },
-  { Icon: Bot, name: "Bot", usage: "AI tools" },
-  { Icon: ChartNoAxesColumn, name: "BarChart", usage: "Analytics" },
-  { Icon: PenTool, name: "PenTool", usage: "Design" },
-  { Icon: Monitor, name: "Monitor", usage: "Desktop" },
-  { Icon: Smartphone, name: "Smartphone", usage: "Mobile" },
-  { Icon: CircleAlert, name: "AlertCircle", usage: "Error state" },
-  { Icon: CircleCheck, name: "CheckCircle", usage: "Success" },
-  { Icon: Info, name: "Info", usage: "Information" },
-  { Icon: TriangleAlert, name: "AlertTriangle", usage: "Warning" },
-  { Icon: Wrench, name: "Wrench", usage: "Settings" },
+	{ Icon: Menu, name: "Menu", usage: "Mobile nav" },
+	{ Icon: X, name: "X", usage: "Close" },
+	{ Icon: ChevronRight, name: "ChevronRight", usage: "Breadcrumbs" },
+	{ Icon: ChevronLeft, name: "ChevronLeft", usage: "Pagination" },
+	{ Icon: ChevronDown, name: "ChevronDown", usage: "Dropdowns" },
+	{ Icon: ArrowRight, name: "ArrowRight", usage: "CTA buttons" },
+	{ Icon: ExternalLink, name: "ExternalLink", usage: "External links" },
+	{ Icon: Sun, name: "Sun", usage: "Light mode" },
+	{ Icon: Moon, name: "Moon", usage: "Dark mode" },
+	{ Icon: Mail, name: "Mail", usage: "Contact" },
+	{ Icon: Search, name: "Search", usage: "Search" },
+	{ Icon: Download, name: "Download", usage: "Downloads" },
+	{ Icon: Copy, name: "Copy", usage: "Copy text" },
+	{ Icon: Check, name: "Check", usage: "Confirm" },
+	{ Icon: FileText, name: "FileText", usage: "Blog/Docs" },
+	{ Icon: LayoutDashboard, name: "Layout", usage: "Page layout" },
+	{ Icon: Layers, name: "Layers", usage: "Sections" },
+	{ Icon: Grid3x3, name: "Grid", usage: "Grid view" },
+	{ Icon: List, name: "List", usage: "List view" },
+	{ Icon: GitFork, name: "GitFork", usage: "GitHub link" },
+	{ Icon: Rss, name: "Rss", usage: "RSS feed" },
+	{ Icon: Zap, name: "Zap", usage: "Performance" },
+	{ Icon: Sparkles, name: "Sparkles", usage: "Animations" },
+	{ Icon: Palette, name: "Palette", usage: "Customize" },
+	{ Icon: Code, name: "Code", usage: "Development" },
+	{ Icon: Globe, name: "Globe", usage: "Web" },
+	{ Icon: Shield, name: "Shield", usage: "Security" },
+	{ Icon: Lock, name: "Lock", usage: "Auth" },
+	{ Icon: Rocket, name: "Rocket", usage: "Launch" },
+	{ Icon: Bot, name: "Bot", usage: "AI tools" },
+	{ Icon: ChartNoAxesColumn, name: "BarChart", usage: "Analytics" },
+	{ Icon: PenTool, name: "PenTool", usage: "Design" },
+	{ Icon: Monitor, name: "Monitor", usage: "Desktop" },
+	{ Icon: Smartphone, name: "Smartphone", usage: "Mobile" },
+	{ Icon: CircleAlert, name: "AlertCircle", usage: "Error state" },
+	{ Icon: CircleCheck, name: "CheckCircle", usage: "Success" },
+	{ Icon: Info, name: "Info", usage: "Information" },
+	{ Icon: TriangleAlert, name: "AlertTriangle", usage: "Warning" },
+	{ Icon: Wrench, name: "Wrench", usage: "Settings" },
 ];
 
 const sampleFaq = [
-  { question: "Sample accordion question?", answer: "This is a sample answer to demonstrate the AccordionItem component. It supports rich HTML content." },
-  { question: "Can I customize this?", answer: "Yes, all components accept props for easy customization. Check the source code for available options." },
+	{
+		question: "Sample accordion question?",
+		answer:
+			"This is a sample answer to demonstrate the AccordionItem component. It supports rich HTML content.",
+	},
+	{
+		question: "Can I customize this?",
+		answer:
+			"Yes, all components accept props for easy customization. Check the source code for available options.",
+	},
 ];
 ---
 

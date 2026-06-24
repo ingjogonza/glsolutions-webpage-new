@@ -1,62 +1,98 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
 import { siteConfig } from "@/config/site";
+import Layout from "@/layouts/Layout.astro";
 import {
-  LayoutDashboard, Layers, FileText, Sparkles, Zap, Palette,
-  ArrowRight, Check
+	ArrowRight,
+	Check,
+	FileText,
+	Layers,
+	LayoutDashboard,
+	Palette,
+	Sparkles,
+	Zap,
 } from "@lucide/astro";
 
 const featureModules = [
-  {
-    icon: LayoutDashboard,
-    title: "Clean, scalable page structure",
-    desc: "Nine pre-built pages — Home, Features, Pricing, Blog, Changelog, About, Contact, Elements, 404 — wired with consistent hierarchy, spacing, and typography. Add your tenth without re-deciding any of it.",
-    points: ["9 pre-built page templates", "Token-driven spacing (4 / 8 / 12 / 16 / 24 …)", "1200px max-width, 800px inner content", "Mobile-first responsive (375 / 768 / 1024 / 1440)"],
-    direction: "left",
-    visual: "wireframe",
-  },
-  {
-    icon: Layers,
-    title: "Modular, plug-and-play sections",
-    desc: "Every section is a standalone Astro component with a consistent props interface. Reorder Hero, Features, Pricing, Steps, FAQ, FinalCTA without rewriting layout glue.",
-    points: ["15+ reusable section components", "Consistent props API (title, description, items)", "Mix, match, and reorder without conflicts", "Documented in /elements for quick reference"],
-    direction: "right",
-    visual: "blocks",
-  },
-  {
-    icon: FileText,
-    title: "Content with full MDX support",
-    desc: "Blog and changelog powered by Astro 6 Content Layer. Plain Markdown for prose, imported Astro components for interactive bits. No CMS, no plugin sprawl.",
-    points: ["Astro 6 Content Layer with glob loader", "Component imports inside MDX", "TOC + reading progress + share built-in", "Auto RSS feed at /rss.xml"],
-    direction: "left",
-    visual: "mdx",
-  },
-  {
-    icon: Sparkles,
-    title: "Subtle, purposeful animations",
-    desc: "Scroll reveals via AOS, orchestrated entrances via motion.js, and a staggered hero text component. Restraint over spectacle — every animation has a reason.",
-    points: ["AOS scroll reveal with `data-aos-once`", "motion.js for orchestrated timelines", "AnimatedText for hero stagger", "Honors prefers-reduced-motion"],
-    direction: "right",
-    visual: "motion",
-  },
-  {
-    icon: Zap,
-    title: "Fast by default",
-    desc: "Astro ships zero JavaScript by default — interactive islands load only where needed. Tested on Vercel Edge and Cloudflare Pages, scoring Lighthouse 95+ across the board from a fresh install.",
-    points: ["Zero JS by default (Astro Islands)", "Automatic Sharp image optimization", "Static output, deployable anywhere", "Lighthouse 95+ on a fresh install"],
-    direction: "left",
-    visual: "lighthouse",
-  },
-  {
-    icon: Palette,
-    title: "Token-driven design system",
-    desc: "Colors, fonts, spacing, radii, and motion timing are all CSS custom properties documented in docs/DESIGN.md. Rebrand by editing one file — the rest of the site follows.",
-    points: ["~30 documented CSS tokens", "Tailwind v4 @theme integration", "Built-in dark mode with no flash", "/elements page as live reference"],
-    direction: "right",
-    visual: "palette",
-  },
+	{
+		icon: LayoutDashboard,
+		title: "Clean, scalable page structure",
+		desc: "Nine pre-built pages — Home, Features, Pricing, Blog, Changelog, About, Contact, Elements, 404 — wired with consistent hierarchy, spacing, and typography. Add your tenth without re-deciding any of it.",
+		points: [
+			"9 pre-built page templates",
+			"Token-driven spacing (4 / 8 / 12 / 16 / 24 …)",
+			"1200px max-width, 800px inner content",
+			"Mobile-first responsive (375 / 768 / 1024 / 1440)",
+		],
+		direction: "left",
+		visual: "wireframe",
+	},
+	{
+		icon: Layers,
+		title: "Modular, plug-and-play sections",
+		desc: "Every section is a standalone Astro component with a consistent props interface. Reorder Hero, Features, Pricing, Steps, FAQ, FinalCTA without rewriting layout glue.",
+		points: [
+			"15+ reusable section components",
+			"Consistent props API (title, description, items)",
+			"Mix, match, and reorder without conflicts",
+			"Documented in /elements for quick reference",
+		],
+		direction: "right",
+		visual: "blocks",
+	},
+	{
+		icon: FileText,
+		title: "Content with full MDX support",
+		desc: "Blog and changelog powered by Astro 6 Content Layer. Plain Markdown for prose, imported Astro components for interactive bits. No CMS, no plugin sprawl.",
+		points: [
+			"Astro 6 Content Layer with glob loader",
+			"Component imports inside MDX",
+			"TOC + reading progress + share built-in",
+			"Auto RSS feed at /rss.xml",
+		],
+		direction: "left",
+		visual: "mdx",
+	},
+	{
+		icon: Sparkles,
+		title: "Subtle, purposeful animations",
+		desc: "Scroll reveals via AOS, orchestrated entrances via motion.js, and a staggered hero text component. Restraint over spectacle — every animation has a reason.",
+		points: [
+			"AOS scroll reveal with `data-aos-once`",
+			"motion.js for orchestrated timelines",
+			"AnimatedText for hero stagger",
+			"Honors prefers-reduced-motion",
+		],
+		direction: "right",
+		visual: "motion",
+	},
+	{
+		icon: Zap,
+		title: "Fast by default",
+		desc: "Astro ships zero JavaScript by default — interactive islands load only where needed. Tested on Vercel Edge and Cloudflare Pages, scoring Lighthouse 95+ across the board from a fresh install.",
+		points: [
+			"Zero JS by default (Astro Islands)",
+			"Automatic Sharp image optimization",
+			"Static output, deployable anywhere",
+			"Lighthouse 95+ on a fresh install",
+		],
+		direction: "left",
+		visual: "lighthouse",
+	},
+	{
+		icon: Palette,
+		title: "Token-driven design system",
+		desc: "Colors, fonts, spacing, radii, and motion timing are all CSS custom properties documented in docs/DESIGN.md. Rebrand by editing one file — the rest of the site follows.",
+		points: [
+			"~30 documented CSS tokens",
+			"Tailwind v4 @theme integration",
+			"Built-in dark mode with no flash",
+			"/elements page as live reference",
+		],
+		direction: "right",
+		visual: "palette",
+	},
 ];
 ---
 

@@ -1,81 +1,84 @@
 ---
-import PricingToggle from "@/components/ui/PricingToggle.astro";
-import Button from "@/components/ui/Button.astro";
 import SectionHeader from "@/components/elements/SectionHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import PricingToggle from "@/components/ui/PricingToggle.astro";
 import { siteConfig } from "@/config/site";
-import { Check, X, ArrowRight, Sparkles } from "@lucide/astro";
+import { ArrowRight, Check, Sparkles, X } from "@lucide/astro";
 
 interface Props {
-  title?: string;
-  description?: string;
-  showHeader?: boolean;
+	title?: string;
+	description?: string;
+	showHeader?: boolean;
 }
 
 const {
-  title = "Simple, transparent pricing",
-  description = "Choose a plan that fits your stage. Upgrade anytime as you grow.",
-  showHeader = true,
+	title = "Simple, transparent pricing",
+	description = "Choose a plan that fits your stage. Upgrade anytime as you grow.",
+	showHeader = true,
 } = Astro.props;
 
 const plans = [
-  {
-    name: "Free",
-    monthlyPrice: "$0",
-    yearlyPrice: "$0",
-    monthlyDescription: "For makers exploring a new idea on the side.",
-    yearlyDescription: "Stay free forever — annual billing won't cost you a cent.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "1 active project", included: true },
-      { text: "Core component library", included: true },
-      { text: "MDX content support", included: true },
-      { text: "Self-host only", included: true },
-      { text: "Community support", included: true },
-      { text: "Email support", included: false },
-    ],
-    cta: "Get started",
-    popular: false,
-  },
-  {
-    name: "Pro",
-    monthlyPrice: "$19",
-    yearlyPrice: "$15",
-    monthlyDescription: "For indie makers shipping their first real product.",
-    yearlyDescription: "Save 20% — best for makers committing to the long haul.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "Unlimited projects", included: true },
-      { text: "Full component library", included: true },
-      { text: "Advanced layout system", included: true },
-      { text: "Custom domains", included: true },
-      { text: "Built-in animations", included: true },
-      { text: "Email support (1 biz day)", included: true },
-      { text: "Quarterly office hours", included: true },
-    ],
-    cta: "Start free trial",
-    popular: true,
-  },
-  {
-    name: "Enterprise",
-    monthlyPrice: "$49",
-    yearlyPrice: "$39",
-    monthlyDescription: "For teams scaling beyond a single founder.",
-    yearlyDescription: "Save 20% on annual — plus a dedicated onboarding session.",
-    monthlySuffix: "/ month",
-    yearlySuffix: "/ month, billed yearly",
-    features: [
-      { text: "Everything in Pro", included: true },
-      { text: "Team collaboration (10+ seats)", included: true },
-      { text: "SSO + audit log", included: true },
-      { text: "Custom integrations", included: true },
-      { text: "Priority support (same day)", included: true },
-      { text: "99.9% SLA", included: true },
-    ],
-    cta: "Contact sales",
-    popular: false,
-  },
+	{
+		name: "Free",
+		monthlyPrice: "$0",
+		yearlyPrice: "$0",
+		monthlyDescription: "For makers exploring a new idea on the side.",
+		yearlyDescription:
+			"Stay free forever — annual billing won't cost you a cent.",
+		monthlySuffix: "/ month",
+		yearlySuffix: "/ month, billed yearly",
+		features: [
+			{ text: "1 active project", included: true },
+			{ text: "Core component library", included: true },
+			{ text: "MDX content support", included: true },
+			{ text: "Self-host only", included: true },
+			{ text: "Community support", included: true },
+			{ text: "Email support", included: false },
+		],
+		cta: "Get started",
+		popular: false,
+	},
+	{
+		name: "Pro",
+		monthlyPrice: "$19",
+		yearlyPrice: "$15",
+		monthlyDescription: "For indie makers shipping their first real product.",
+		yearlyDescription:
+			"Save 20% — best for makers committing to the long haul.",
+		monthlySuffix: "/ month",
+		yearlySuffix: "/ month, billed yearly",
+		features: [
+			{ text: "Unlimited projects", included: true },
+			{ text: "Full component library", included: true },
+			{ text: "Advanced layout system", included: true },
+			{ text: "Custom domains", included: true },
+			{ text: "Built-in animations", included: true },
+			{ text: "Email support (1 biz day)", included: true },
+			{ text: "Quarterly office hours", included: true },
+		],
+		cta: "Start free trial",
+		popular: true,
+	},
+	{
+		name: "Enterprise",
+		monthlyPrice: "$49",
+		yearlyPrice: "$39",
+		monthlyDescription: "For teams scaling beyond a single founder.",
+		yearlyDescription:
+			"Save 20% on annual — plus a dedicated onboarding session.",
+		monthlySuffix: "/ month",
+		yearlySuffix: "/ month, billed yearly",
+		features: [
+			{ text: "Everything in Pro", included: true },
+			{ text: "Team collaboration (10+ seats)", included: true },
+			{ text: "SSO + audit log", included: true },
+			{ text: "Custom integrations", included: true },
+			{ text: "Priority support (same day)", included: true },
+			{ text: "99.9% SLA", included: true },
+		],
+		cta: "Contact sales",
+		popular: false,
+	},
 ];
 ---
 
