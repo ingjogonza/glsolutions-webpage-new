@@ -1,439 +1,382 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import HeroSection from "@/components/home/HeroSection.astro";
 import SectionHeader from "@/components/elements/SectionHeader.astro";
-import Pricing from "@/components/sections/Pricing.astro";
-import FAQ from "@/components/sections/FAQ.astro";
-import BlogSection from "@/components/sections/BlogSection.astro";
+import Badge from "@/components/ui/Badge.astro";
 import Button from "@/components/ui/Button.astro";
-import BrowserFrame from "@/components/ui/BrowserFrame.astro";
-import TechStackCard from "@/components/cards/TechStackCard.astro";
 import { siteConfig } from "@/config/site";
-import {
-  LayoutDashboard, Layers, FileText,
-  Bot, Code, PenTool, Rocket, GitFork, ChartNoAxesColumnIncreasing,
-  ArrowRight,
-  Compass, Triangle, Sun, CircleDot, Orbit, Anvil
-} from "@lucide/astro";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowRight, Check, Cpu, Map as MapIcon, Users } from "@lucide/astro";
 
-// FAQ data
-const faqItems = [
-  { question: "Is this template free?", answer: "Yes. RicoFast is MIT-licensed and free for both personal and commercial use. Fork it, ship with it, sell what you build on top of it — no attribution required." },
-  { question: "Do I need to know Astro to use it?", answer: "Basic HTML/CSS familiarity is enough. The template is structured so the first 90% of customization happens in three places: site.js, global.css tokens, and content directories. Most users ship without writing any new Astro components." },
-  { question: "Can I customize the design system?", answer: "Yes. Colors, fonts, spacing, and border radii are all CSS custom properties defined in src/styles/global.css. The full token reference lives in docs/DESIGN.md so you always know what to change." },
-  { question: "Where can I deploy it?", answer: "Anywhere that hosts static sites — Vercel, Netlify, Cloudflare Pages, GitHub Pages, AWS S3, or your own server. The build outputs a plain dist/ directory. Vercel and Netlify have one-click setup." },
-  { question: "How fast is it really?", answer: "Lighthouse 95+ across Performance, Accessibility, Best Practices, and SEO on a fresh install. Astro ships zero JS by default — interactive bits load only where needed." },
-  { question: "Is there support?", answer: "Yes — open an issue on GitHub. The repo is actively maintained and community contributions are welcome. The Pro/Enterprise tiers shown on the Pricing page are demo content for the template itself, not a paid plan for RicoFast." },
+// Datos — Problema: 5 puntos de dolor.
+const problemPoints = [
+	"La IA genera código rápido, pero nadie sabe qué rompe qué.",
+	"Si el dev que construyó el sistema se va, el conocimiento se va con él.",
+	"Pagaste por desarrollo y no puedes revisarlo ni explicar lo que recibiste.",
+	"Los releases se hacen más lentos aunque el equipo trabaje igual.",
+	"Un inversor técnico pide ver la arquitectura y nadie puede explicarla.",
 ];
 
-// Features data
-const features = [
-  { icon: "/assets/icon/structure.png",  title: "Clean page structure", desc: "9 pre-built pages — Home, Features, Pricing, Blog, Changelog, About, Contact, Elements, 404 — wired and responsive out of the box." },
-  { icon: "/assets/icon/components.png", title: "Reusable sections", desc: "15+ modular section components — Hero, FeatureGrid, Pricing, FAQ, Steps, FinalCTA — composable with no layout conflicts." },
-  { icon: "/assets/icon/document.png",   title: "MDX-powered content", desc: "Blog and changelog driven by Astro 6 Content Layer. Import components inside Markdown. No CMS needed." },
-  { icon: "/assets/icon/fast.png",       title: "Lightweight and fast", desc: "Zero JS by default. Lighthouse 95+ on Performance, Accessibility, Best Practices, and SEO from a fresh install." },
-  { icon: "/assets/icon/motion.png",     title: "Built-in motion", desc: "Scroll reveals via AOS, orchestrated entrances via motion.js. Honors prefers-reduced-motion." },
-  { icon: "/assets/icon/customize.png",  title: "Easy to customize", desc: "~30 CSS custom properties drive every color and font. Rebrand in minutes by editing one file." },
+// Datos — Solución: comparación de dos columnas.
+const comparison = {
+	sinMapa: [
+		"La IA genera código sin entender el negocio",
+		"Nadie sabe qué rompe qué cuando algo cambia",
+		"La deuda técnica crece en silencio hasta que explota",
+		"Si el equipo se va, el conocimiento se va con ellos",
+	],
+	conSdd: [
+		"El sistema está documentado antes de construirse",
+		"La IA construye lo que el ingeniero definió",
+		"Cada decisión técnica queda registrada y explicada",
+		"Cualquier equipo puede tomar el proyecto desde el día uno",
+	],
+};
+
+// Datos — Solución: 3 tarjetas.
+const solutionCards = [
+	{
+		icon: MapIcon,
+		title: "El mapa antes que el código",
+		desc: "Documentamos cada decisión técnica antes de escribir la primera línea. La IA ejecuta el mapa, no lo inventa.",
+	},
+	{
+		icon: Cpu,
+		title: "La IA construye, el ingeniero decide",
+		desc: "La IA acelera. La arquitectura, los trade-offs y el alcance los deciden los ingenieros.",
+	},
+	{
+		icon: Users,
+		title: "Cualquiera puede entenderlo",
+		desc: "El sistema queda documentado de forma que cualquier desarrollador nuevo puede hacerse cargo desde el día uno.",
+	},
 ];
 
-// Problem cards data
-const problems = [
-  { icon: "/assets/icon/clock.png",   title: "Starting fresh slows you down", desc: "Every SaaS needs the same 12 sections. Rebuilding them for every project costs weeks you should spend on the product." },
-  { icon: "/assets/icon/battery.png", title: "Generic templates devalue work", desc: "Most free templates look like templates. Your product deserves a site that feels deliberate, not stamped out." },
-  { icon: "/assets/icon/bell.png",    title: "Unstable systems break with growth", desc: "Ad-hoc colors, magic numbers, drift between pages — small inconsistencies compound until every change risks breaking something else." },
+// Datos — Proceso 5 fases: línea de tiempo.
+const phases = [
+	{
+		num: "01",
+		title: "Entendemos tu negocio",
+		duration: "3–5 días",
+		desc: "Documentamos cómo funciona tu dominio antes de tocar el teclado. Tú apruebas antes de seguir.",
+	},
+	{
+		num: "02",
+		title: "Diseñamos la estructura",
+		duration: "4–6 días",
+		desc: "Decidimos cómo está organizado el sistema y por qué, con las alternativas descartadas registradas. Tú apruebas antes de seguir.",
+	},
+	{
+		num: "03",
+		title: "Definimos qué hace cada parte",
+		duration: "3–5 días",
+		desc: "Documentamos exactamente qué debe pasar en cada funcionalidad, incluyendo casos difíciles y errores posibles. Tú firmas el alcance.",
+	},
+	{
+		num: "04",
+		title: "Construimos siguiendo el mapa",
+		duration: "Iterativo",
+		desc: "La IA construye lo definido en el paso anterior. Revisamos cada entrega contra los criterios aprobados.",
+	},
+	{
+		num: "05",
+		title: "Entregamos y te dejamos listo",
+		duration: "3–4 días",
+		desc: "Validamos que el sistema cumple lo acordado y entregamos toda la documentación para que cualquiera pueda continuar sin nosotros.",
+	},
 ];
 
-// Use cases
-const useCases = [
-  { icon: Bot, label: "AI tools", desc: "Credible launch site from day one" },
-  { icon: Code, label: "Developer tools", desc: "API docs, SDK landing, dev platforms" },
-  { icon: PenTool, label: "Design tools", desc: "Creative apps and design systems" },
-  { icon: Rocket, label: "Micro SaaS", desc: "Indie projects and side hustles" },
-  { icon: GitFork, label: "Open-source", desc: "Project sites and community hubs" },
-  { icon: ChartNoAxesColumnIncreasing, label: "Analytics", desc: "Dashboards and data tools" },
+// Datos — Para quién: 3 personas.
+const personas = [
+	{
+		title: "Founder técnico",
+		points: [
+			"usa IA para desarrollar pero el código no conecta con la lógica de negocio",
+			"onboarding de nuevos devs toma semanas",
+			"sin el founder nadie decide con criterio técnico",
+			"lanzamientos cada vez más lentos sin explicación clara",
+		],
+	},
+	{
+		title: "Founder de negocio",
+		points: [
+			"pagó por desarrollo y no puede entenderlo ni explicarlo a un inversor",
+			"plazos se extienden sin explicación",
+			"si el equipo se va, el conocimiento se va con ellos",
+			"no sabe si el sistema aguantará al crecer",
+		],
+	},
+	{
+		title: "Operaciones sin automatizar",
+		points: [
+			"equipo 100% en producto, sin tiempo para automatizar",
+			"flujos en N8N/Make que nadie entiende y se rompen",
+			"procesos manuales (onboarding, notificaciones, reportes)",
+			"el trabajo manual escala junto con el volumen",
+		],
+	},
 ];
 
-
-// Logos placeholder — fictional brand wordmarks for the social-proof strip.
-// Swap with real customer logos / SVGs when shipping.
-const logos = [
-  { name: "Northwind", icon: Compass },
-  { name: "Acme", icon: Triangle },
-  { name: "Lumen", icon: Sun },
-  { name: "Helio", icon: CircleDot },
-  { name: "Orbit", icon: Orbit },
-  { name: "Forge", icon: Anvil },
+// Datos — Servicios teaser: 5 líneas.
+const services = [
+	{
+		name: "Ejecución",
+		desc: "Construimos tu sistema siguiendo SDD de punta a punta.",
+	},
+	{
+		name: "Rescate",
+		desc: "Recuperamos un proyecto que nadie entiende y lo documentamos.",
+	},
+	{
+		name: "Consultoría",
+		desc: "Acompañamos a tu equipo para adoptar Spec Driven Development.",
+	},
+	{
+		name: "CTO Fraccionado",
+		desc: "Definimos arquitectura y criterios técnicos por horas.",
+	},
+	{
+		name: "Automatización",
+		desc: "Reemplazamos procesos manuales por flujos documentados.",
+	},
 ];
 ---
 
 <Layout
-  title="RicoFast — A design-led SaaS template for Astro"
-  description="Ship your SaaS site in days, not weeks. A clean, fast, and modular open-source template built with Astro and Tailwind CSS."
-  keywords="saas template, astro template, tailwind template, startup website, indie hacker"
+  title={siteConfig.meta.title}
+  description={siteConfig.meta.description}
+  keywords={siteConfig.meta.keywords}
 >
 
-  <!-- 1. Hero -->
-  <HeroSection />
-
-  <!-- 2. Logo / Social Proof -->
-  <section class="py-12 md:py-16 lg:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true"  data-aos-delay="650" >
-    <p class="text-center text-sm text-neutral-400 dark:text-neutral-500 mb-6">Drop in your customer logos when you launch</p>
-    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 opacity-60">
-      {logos.map((logo) => (
-        <div class="flex items-center gap-2 px-4 py-2 border border-dashed border-neutral-300 dark:border-neutral-700 rounded-lg">
-          <logo.icon class="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
-          <span class="text-sm font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{logo.name}</span>
+  {/* 1. HERO */}
+  <section class="py-16 md:py-24 lg:py-28 site-container" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="max-w-3xl mx-auto text-center">
+      <Badge variant="primary" size="lg">B2B SaaS · Fintech · Seed / Pre-seed</Badge>
+      <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-brand text-neutral-800 dark:text-neutral-100 leading-tight tracking-normal">
+        Spec Driven Development para startups B2B SaaS y Fintech en Chile y LatAm
+      </h1>
+      <p class="mt-6 text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+        Construimos sistemas para startups en cualquier parte del mundo. Antes de escribir una línea de código, documentamos cada decisión técnica. La IA acelera el trabajo — los ingenieros mantienen el control.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <Button url={`mailto:${siteConfig.mail}`} type="fill" className="text-lg px-8 py-3.5">
+          Escríbenos a hola@glsolutions.tech <ArrowRight size={18} />
+        </Button>
+        <Button url="#evidencia" type="outline" className="text-lg px-8 py-3.5">
+          Ver un ejemplo real →
+        </Button>
+      </div>
+      <dl class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <dt class="text-3xl font-brand text-primary">15+</dt>
+          <dd class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Años de experiencia aplicada</dd>
         </div>
-      ))}
+        <div>
+          <dt class="text-3xl font-brand text-primary">5</dt>
+          <dd class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Fases con puerta de calidad</dd>
+        </div>
+        <div>
+          <dt class="text-3xl font-brand text-primary">0</dt>
+          <dd class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Decisiones técnicas sin documentar</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <!-- 3. Problem -->
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
+
+  {/* 2. PROBLEMA */}
   <section class="py-16 md:py-24 site-container">
-    <SectionHeader title="Most SaaS sites start with the wrong problems" description="The hard part isn't building features. It's building a site that doesn't feel generic, doesn't drift apart over time, and doesn't take a month of weekends." />
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-      {problems.map((problem, i) => (
+    <SectionHeader
+      title="¿Tu código crece, pero tu equipo lo entiende cada vez menos?"
+      description="Estos problemas tienen un origen común: el sistema se construyó sin que nadie definiera primero cómo debía funcionar."
+    />
+    <ul class="mt-10 max-w-3xl mx-auto space-y-4">
+      {problemPoints.map((point) => (
+        <li class="flex gap-3 items-start text-neutral-700 dark:text-neutral-300 leading-relaxed">
+          <span class="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-primary"></span>
+          <span>{point}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-10 max-w-3xl mx-auto text-neutral-600 dark:text-neutral-300 leading-relaxed">
+      Estos problemas tienen un origen común: el sistema se construyó sin que nadie definiera primero cómo debía funcionar. La IA genera código rápido, pero sin ese mapa previo genera sin contexto — y el equipo queda atrapado en lo que la máquina decidió. Existe una forma de construir software donde cada decisión queda registrada antes de escribir la primera línea de código.
+    </p>
+  </section>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
+
+  {/* 3. SOLUCIÓN */}
+  <section class="py-16 md:py-24 site-container">
+    <SectionHeader
+      title="Spec Driven Development — la spec define el sistema antes del código."
+      description="En GL Solutions, antes de escribir una línea de código documentamos exactamente cómo debe funcionar el sistema: qué hace cada parte, por qué se tomó cada decisión y qué pasa en cada caso posible. Cuando eso está acordado y aprobado, recién entonces la IA construye — siguiendo ese mapa, no inventando el camino."
+    />
+
+    {/* Comparación de dos columnas */}
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-bg-secondary dark:bg-bg-secondary-dark">
+        <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-4">Sin mapa previo</h3>
+        <ul class="space-y-3">
+          {comparison.sinMapa.map((item) => (
+            <li class="flex gap-3 items-start text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <span class="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="p-6 rounded-xl border border-primary/30 bg-primary/5 dark:bg-primary/10">
+        <h3 class="text-lg font-semibold text-primary mb-4">Con SDD</h3>
+        <ul class="space-y-3">
+          {comparison.conSdd.map((item) => (
+            <li class="flex gap-3 items-start text-sm text-neutral-700 dark:text-neutral-200 leading-relaxed">
+              <Check size={16} class="mt-0.5 shrink-0 text-primary" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    {/* 3 tarjetas */}
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {solutionCards.map((card, i) => (
         <div
           class="p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700"
           data-aos="fade-up-sm"
           data-aos-delay={i * 100}
           data-aos-once="true"
         >
-          <img
-            src={problem.icon}
-            alt={problem.title}
-            loading="lazy"
-            width="64"
-            height="64"
-            class="w-16 h-16 mb-4 object-contain"
-          />
-          <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{problem.title}</h3>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{problem.desc}</p>
+          <card.icon class="w-6 h-6 text-primary mb-3" />
+          <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{card.title}</h3>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{card.desc}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- 4. Solution -->
-  <section class="py-8 md:py-12 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">A design system, not just a template</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-        RicoFast is built on a documented token system — colors, type scale, spacing, motion — so every page you add stays coherent with the ones already shipped. Less arbitration, fewer regressions, more time on the product.
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
+
+  {/* 4. EVIDENCIA */}
+  <section id="evidencia" class="py-16 md:py-24 site-container scroll-mt-24">
+    <SectionHeader
+      title="Así se ve un sistema construido con SDD."
+      description="Este es un ejemplo real del tipo de documento que GL Solutions produce antes de construir cualquier funcionalidad: el flujo completo de verificación de identidad de una plataforma Fintech."
+    />
+    <div class="mt-10 max-w-3xl mx-auto">
+      <pre class="rounded-xl bg-neutral-900 text-neutral-100 dark:bg-neutral-950 p-6 overflow-x-auto text-sm leading-7 font-mono"><code>DADO QUE  usuario con estado KYC 'pendiente' ha subido cédula con ambas caras
+CUANDO    el verificador externo devuelve score: 87 y los datos coinciden
+ENTONCES  el perfil cambia a 'aprobado' automáticamente y queda habilitado</code></pre>
+      <p class="mt-6 text-center">
+        <a href="/blog/finpago-kyc-spec-driven-development" class="inline-flex items-center gap-1.5 text-primary font-medium hover:underline">
+          Ver el caso completo <ArrowRight size={16} />
+        </a>
       </p>
     </div>
-    <div class="mt-10 md:mt-12 flex flex-wrap justify-center items-end gap-4 sm:gap-6 md:gap-8">
-      {[
-        { name: 'blue', file: 'folder-blue.webp' },
-        { name: 'yellow', file: 'folder-yellow.webp' },
-        { name: 'green', file: 'folder-greean.webp' },
-        { name: 'red', file: 'folder-red.webp' },
-        { name: 'gray', file: 'folder-gray.webp' },
-      ].map((folder, i) => (
-        <div
-          data-aos="fade-up-xs"
-          data-aos-delay={i * 120}
-          data-aos-once="true"
-          class="inline-block"
-        >
-          <img
-            src={`/assets/folder/${folder.file}`}
-            alt={`${folder.name} folder`}
-            width="128"
-            height="128"
-            class="w-20 sm:w-24 md:w-28 lg:w-32 h-auto drop-shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-105 hover:drop-shadow-lg"
-          />
-        </div>
-      ))}
+  </section>
+
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
+
+  {/* 5. PROCESO — 5 fases */}
+  <section class="py-16 md:py-24 site-container">
+    <SectionHeader
+      title="Cómo trabajamos. Cinco pasos, cada uno requiere tu aprobación."
+      description="Cada fase es una puerta de calidad: no avanzamos hasta que tú apruebas lo definido."
+    />
+    <div class="mt-12 relative max-w-3xl mx-auto">
+      <div class="absolute left-4 md:left-5 top-1.5 bottom-1.5 w-px bg-neutral-200 dark:bg-neutral-700"></div>
+      <ol class="space-y-10">
+        {phases.map((phase, i) => (
+          <li
+            class="relative pl-12 md:pl-16"
+            data-aos="fade-up-sm"
+            data-aos-delay={i * 80}
+            data-aos-once="true"
+          >
+            <div class="absolute left-0 top-0 w-9 h-9 md:w-11 md:h-11 rounded-full bg-primary text-neutral-50 flex items-center justify-center font-brand text-base shadow-sm">
+              {phase.num}
+            </div>
+            <div class="mb-1 flex items-center gap-3 flex-wrap">
+              <h3 class="text-base md:text-lg font-semibold text-neutral-800 dark:text-neutral-100">{phase.title}</h3>
+              <Badge variant="primary" size="sm">{phase.duration}</Badge>
+            </div>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{phase.desc}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
 
-  <!-- 5. Features Grid -->
+  {/* 6. PARA QUIÉN */}
   <section class="py-16 md:py-24 site-container">
-    <SectionHeader title="Everything you need, nothing you don't" description="A focused set of features built for real SaaS sites. No bloat, no half-finished add-ons." />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-      {features.map((feature, i) => (
+    <SectionHeader
+      title="¿Eres el cliente correcto para GL Solutions?"
+      description="Trabajamos con founders y equipos que ya no toleran código que nadie entiende."
+    />
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {personas.map((persona, i) => (
         <div
+          class="p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700"
           data-aos="fade-up-sm"
           data-aos-delay={i * 100}
           data-aos-once="true"
-          class="h-full"
         >
-          <div
-            class="h-full p-6 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border transition-all duration-300 ease-in-out border-primary/10 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1"
-          >
-            <img
-              src={feature.icon}
-              alt={feature.title}
-              loading="lazy"
-              width="64"
-              height="64"
-              class="w-16 h-16 mb-4 object-contain"
-            />
-            <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2">{feature.title}</h3>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{feature.desc}</p>
-          </div>
+          <h3 class="text-base font-semibold text-neutral-800 dark:text-neutral-100 mb-4">{persona.title}</h3>
+          <ul class="space-y-3">
+            {persona.points.map((point) => (
+              <li class="flex gap-3 items-start text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                <span class="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-primary"></span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- 6. Product Preview -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="A full layout system, not just sections" description="Hero, features, pricing, dashboards, settings — every page is composed from the same token system, so the whole product feels coherent." />
-    <div class="mt-8 max-w-4xl mx-auto" data-aos="fade-up-sm" data-aos-once="true" data-aos-delay="300">
-      <BrowserFrame url="app.ricoui.com/dashboard">
-        <div class="flex h-[300px] md:h-[400px]">
-          <!-- Sidebar -->
-          <aside class="hidden sm:flex flex-col w-14 md:w-16 border-r border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-900/40 py-4 px-2 md:px-3 gap-2">
-            <div class="w-7 h-7 mx-auto rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center mb-2">
-              <div class="w-2.5 h-2.5 rounded-sm bg-primary"></div>
-            </div>
-            <div class="app-nav-active relative w-full h-8 rounded-md bg-primary/15 border border-primary/30 flex items-center justify-center">
-              <LayoutDashboard class="w-3.5 h-3.5 text-primary" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <Layers class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <FileText class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="w-full h-8 rounded-md flex items-center justify-center hover:bg-neutral-200/40 dark:hover:bg-neutral-700/40">
-              <ChartNoAxesColumnIncreasing class="w-3.5 h-3.5 text-neutral-400" />
-            </div>
-            <div class="flex-1"></div>
-            <div class="w-7 h-7 mx-auto rounded-full bg-accent/40 border border-accent/60"></div>
-          </aside>
+  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 site-container"></div>
 
-          <!-- Main -->
-          <div class="flex-1 p-4 md:p-6 flex flex-col gap-4 overflow-hidden">
-            <!-- Toolbar -->
-            <div class="flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3">
-                <div>
-                  <h3 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100 leading-none">Overview</h3>
-                  <p class="text-[10px] text-neutral-400 mt-1">Last 30 days</p>
-                </div>
-                <span class="hidden md:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-emerald-500/30 bg-emerald-500/5">
-                  <span class="app-live-dot relative w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span class="text-[9px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-medium">Live</span>
-                </span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="hidden md:block w-32 h-7 rounded-md border border-neutral-200 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40"></div>
-                <div class="w-7 h-7 rounded-full bg-primary/20 border border-primary/30"></div>
-              </div>
-            </div>
-
-            <!-- Stat row -->
-            <div class="grid grid-cols-3 gap-2 md:gap-3">
-              {[
-                { label: "Revenue", value: "$48.2k", delta: "+22.1%" },
-                { label: "New users", value: "1,284", delta: "+8.4%" },
-                { label: "MRR", value: "$12.6k", delta: "+5.2%" },
-              ].map((s, i) => (
-                <div
-                  class="app-stat-card relative overflow-hidden rounded-md border border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40 p-2 md:p-3"
-                  style={`--shimmer-delay: ${i * 1.2}s;`}
-                >
-                  <span class="block text-[9px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{s.label}</span>
-                  <span class="block text-sm md:text-base font-brand text-neutral-800 dark:text-neutral-100 mt-1">{s.value}</span>
-                  <span class="block text-[9px] text-emerald-600 dark:text-emerald-400 mt-1">{s.delta}</span>
-                </div>
-              ))}
-            </div>
-
-            <!-- Table mock -->
-            <div class="flex-1 rounded-md border border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40 overflow-hidden">
-              <div class="grid grid-cols-12 gap-2 px-3 py-2 border-b border-primary/10 dark:border-neutral-700 text-[9px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                <span class="col-span-5">Customer</span>
-                <span class="col-span-3">Plan</span>
-                <span class="col-span-2">Status</span>
-                <span class="col-span-2 text-right">MRR</span>
-              </div>
-              {[1, 2, 3, 4].map((i) => (
-                <div class:list={["grid grid-cols-12 gap-2 items-center px-3 py-2 border-b border-primary/5 dark:border-neutral-700/40 last:border-0", i === 1 && "app-row-cursor"]}>
-                  <div class="col-span-5 flex items-center gap-2">
-                    <div class={`w-5 h-5 rounded-full ${i % 2 === 0 ? 'bg-primary/30' : 'bg-accent/40'}`}></div>
-                    <div
-                      class="app-customer-bar h-1.5 rounded-full bg-neutral-300 dark:bg-neutral-600"
-                      style={`width: ${[60, 72, 50, 64][i - 1]}%; animation-delay: ${(i - 1) * 750}ms;`}
-                    ></div>
-                    {i === 1 && <span class="app-blink-cursor inline-block w-[2px] h-3 bg-primary"></span>}
-                  </div>
-                  <div class="col-span-3">
-                    <div class="inline-block px-1.5 py-0.5 rounded text-[9px] bg-primary/10 text-primary">{['Pro', 'Team', 'Pro', 'Enterprise'][i - 1]}</div>
-                  </div>
-                  <div class="col-span-2">
-                    <div class="inline-flex items-center gap-1">
-                      <div class={`w-1.5 h-1.5 rounded-full ${i === 3 ? 'bg-amber-400' : 'bg-emerald-400'}`}></div>
-                      <span class="text-[9px] text-neutral-500 dark:text-neutral-400">{i === 3 ? 'Trial' : 'Active'}</span>
-                    </div>
-                  </div>
-                  <div class="col-span-2 text-right text-[10px] font-medium text-neutral-700 dark:text-neutral-200">${[148, 89, 49, 290][i - 1]}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </BrowserFrame>
-      <p class="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-4">Replace this mock with your own product screenshot — see <code class="text-primary">src/pages/index.astro</code>.</p>
-    </div>
-  </section>
-
-  <!-- 7. Use Cases -->
+  {/* 7. SERVICIOS TEASER */}
   <section class="py-16 md:py-24 site-container">
-    <SectionHeader title="Made for different kinds of SaaS" description="Whether you're shipping an AI tool, a developer platform, or an indie side project — the layout system adapts to your product." />
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-8" >
-      {useCases.map((uc, i) => (
-        <div
-          class="flex flex-col items-center p-4 rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-          data-aos="fade-up-sm"
-          data-aos-delay={i * 120}
-          data-aos-once="true"
-        >
-          <uc.icon class="w-6 h-6 text-primary mb-2" />
-          <span class="text-sm font-semibold text-neutral-800 dark:text-neutral-100">{uc.label}</span>
-          <span class="text-xs text-neutral-400 mt-1">{uc.desc}</span>
-        </div>
+    <SectionHeader
+      title="Cinco formas de trabajar con GL Solutions."
+      description="Desde construir un sistema desde cero hasta rescatar uno que ya nadie entiende."
+    />
+    <ul class="mt-10 max-w-3xl mx-auto divide-y divide-neutral-200 dark:divide-neutral-700">
+      {services.map((service) => (
+        <li class="py-4 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span class="text-base font-semibold text-neutral-800 dark:text-neutral-100 sm:w-48 shrink-0">{service.name}</span>
+          <span class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{service.desc}</span>
+        </li>
       ))}
+    </ul>
+    <div class="mt-10 flex justify-center">
+      <Button url="/pricing" type="outline" className="text-base px-6 py-3">
+        Ver todos los servicios y precios <ArrowRight size={16} />
+      </Button>
     </div>
   </section>
 
-
-
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
-
-  <!-- 9. Tech Stack -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-sm" data-aos-once="true">
-    <SectionHeader title="Built with modern tools" />
-    <div class="mt-8" data-aos="fade-up-sm" data-aos-once="true" data-aos-delay="300">
-      <TechStackCard />
-    </div>
-  </section>
-
-  <!-- 10. Pricing -->
-  <Pricing
-    title="Free template, real pricing examples"
-    description="RicoFast itself is MIT-licensed and free. The 3-tier layout below is reference content — swap in your own plans when you launch."
-  />
-
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
-
-  <!-- 11. FAQ -->
-  <FAQ
-    title="Frequently asked questions"
-    items={faqItems}
-  />
-
-  <!-- 12. Latest Articles -->
-  <div class="py-16 md:py-24">
-    <BlogSection title="Latest articles" />
-  </div>
-
-  <!-- 13. Final CTA -->
-  <section class="py-12 md:py-20 site-container  rounded-xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="200" >Start building your SaaS today</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="300">
-        Clone the template, replace the content, ship to production. Three steps to a live site.
+  {/* 8. CTA FINAL */}
+  <section class="py-16 md:py-24 site-container">
+    <div
+      class="max-w-3xl mx-auto text-center rounded-xl px-6 py-16 md:py-20"
+      style="background-color: #0F1F2E;"
+    >
+      <h2 class="text-3xl md:text-4xl font-brand text-neutral-50 mb-6">
+        Software que cualquier ingeniero puede entender desde el día uno.
+      </h2>
+      <p class="mb-8">
+        <a
+          href={`mailto:${siteConfig.mail}`}
+          class="inline-flex text-xl md:text-2xl font-medium text-primary-light underline-offset-4 hover:underline"
+        >
+          hola@glsolutions.tech
+        </a>
       </p>
-      <div class="flex flex-wrap justify-center gap-3" data-aos="fade-up-xs" data-aos-once="true" data-aos-delay="400">
-        <Button url={siteConfig.social.github} type="fill" className="text-lg px-8 py-3" target="_blank">
-          Get Template <ArrowRight size={18} />
-        </Button>
-        <Button url="/features" className="text-lg px-8 py-3">
-          View Features
-        </Button>
-      </div>
     </div>
   </section>
 
 </Layout>
-
-<style>
-  /* ─── App preview — Live ping dot ─────────────────── */
-  .app-live-dot::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background: rgb(16, 185, 129);
-    animation: app-live-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-  @keyframes app-live-ping {
-    0%   { transform: scale(1);   opacity: 0.7; }
-    80%, 100% { transform: scale(2.8); opacity: 0; }
-  }
-
-  /* ─── Active sidebar item — focus ring pulse ─────── */
-  .app-nav-active::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 10px;
-    border: 1px solid var(--color-primary);
-    opacity: 0;
-    animation: app-nav-ring 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    pointer-events: none;
-  }
-  @keyframes app-nav-ring {
-    0%        { opacity: 0;    transform: scale(0.96); }
-    50%       { opacity: 0.65; transform: scale(1.05); }
-    100%      { opacity: 0;    transform: scale(1.12); }
-  }
-
-  /* ─── Stat cards — staggered shimmer sweep ────────── */
-  .app-stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 35%,
-      rgba(45, 109, 195, 0.18) 50%,
-      transparent 65%,
-      transparent 100%
-    );
-    transform: translateX(-100%);
-    animation: app-stat-shimmer 4.5s ease-in-out infinite;
-    animation-delay: var(--shimmer-delay, 0s);
-    pointer-events: none;
-  }
-  @keyframes app-stat-shimmer {
-    0%        { transform: translateX(-100%); }
-    35%, 100% { transform: translateX(100%);  }
-  }
-
-  /* ─── Table — typing cursor on first row ─────────── */
-  .app-blink-cursor {
-    animation: app-blink 1.05s steps(2, start) infinite;
-  }
-  @keyframes app-blink {
-    to { visibility: hidden; }
-  }
-
-  /* ─── Customer bars — staggered "live data" flux ── */
-  .app-customer-bar {
-    transform-origin: left center;
-    animation: app-bar-flux 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-  @keyframes app-bar-flux {
-    0%, 100% { transform: scaleX(1);    opacity: 1; }
-    35%      { transform: scaleX(0.72); opacity: 0.78; }
-    70%      { transform: scaleX(1.06); opacity: 1; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .app-live-dot::before,
-    .app-nav-active::after,
-    .app-stat-card::before,
-    .app-blink-cursor,
-    .app-customer-bar {
-      animation: none !important;
-    }
-  }
-</style>
