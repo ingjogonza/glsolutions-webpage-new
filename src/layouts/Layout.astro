@@ -31,10 +31,8 @@ import "../styles/article-enhancements.css";
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script is:inline>
       if (typeof Storage !== 'undefined') {
-        if (
-          localStorage.getItem('dark_mode') &&
-          localStorage.getItem('dark_mode') == 'true'
-        ) {
+        // Dark is the default. Only force light if the user has explicitly chosen it.
+        if (localStorage.getItem('dark_mode') !== 'false') {
           document.documentElement.classList.add('dark')
         }
       }
