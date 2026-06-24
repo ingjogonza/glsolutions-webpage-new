@@ -1,2 +1,11 @@
+# robots.txt — GL Solutions
+# Allow all crawlers on the public site; reference the sitemap for
+# efficient discovery.
+
 User-agent: *
 Allow: /
+
+# Block Astro internal / build artifact paths in case any ever leak.
+Disallow: /_astro/
+
+Sitemap: https://www.glsolutions.tech/sitemap-index.xml

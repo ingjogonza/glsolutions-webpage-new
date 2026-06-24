@@ -8,8 +8,9 @@ import { defineConfig } from "astro/config";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Get the site URL from environment variables, or use the default value if not set
 // Note: After the first deployment, be sure to set the correct PUBLIC_SITE_URL in the .env file
-const siteUrl =
-	import.meta.env.PUBLIC_SITE_URL || "https://ricofast.pages.dev/";
+// Use process.env (not import.meta.env) because Astro evaluates astro.config.mjs BEFORE
+// loading .env files, so import.meta.env.PUBLIC_SITE_URL is always undefined here.
+const siteUrl = process.env.PUBLIC_SITE_URL || "https://www.glsolutions.tech/";
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,5 +30,17 @@ export default defineConfig({
 		port: 5200,
 	},
 
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(),
+		sitemap({
+			// Exclude non-content routes that the Astro file-based router
+			// would otherwise surface in the sitemap. /elements is a
+			// template demo page (not public GL content); /rss.xml is a
+			// feed (not a page); 404 is an error page.
+			filter: (page) =>
+				!page.includes("/elements") &&
+				!page.includes("/rss.xml") &&
+				!page.includes("/404"),
+		}),
+	],
 });
