@@ -1,5 +1,4 @@
 ---
-import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
@@ -114,11 +113,13 @@ const glossary = [
   title="Spec Driven Development: metodología en 5 fases | GL Solutions Chile"
   description="Cómo aplicamos Spec Driven Development en cada proyecto: DMD, ADR, Feature Spec en BDD, construcción con IA y handoff documentado. 5 fases, 3-5 días cada una."
 >
-  <section class="site-container my-12">
-    <PageHeader
-      title="Spec Driven Development: el mapa antes que el código"
-      description="SDD no es una metodología más. Es la diferencia entre un sistema que tu equipo puede explicar y uno que solo el dev original entiende. Esto es exactamente cómo se aplica en cada proyecto."
-    />
+  <section class="site-container my-12 md:my-16">
+    <h1 class="max-w-3xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl">
+      Spec Driven Development: el mapa antes que el código
+    </h1>
+    <p class="mt-5 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
+      SDD no es una metodología más. Es la diferencia entre un sistema que tu equipo puede explicar y uno que solo el dev original entiende. Esto es exactamente cómo se aplica en cada proyecto.
+    </p>
   </section>
 
   {sddaPhases.map((phase) => (
@@ -171,6 +172,17 @@ const glossary = [
           ))}
         </ul>
       </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20 site-container">
+    <div class="max-w-2xl mx-auto text-center border-t border-dashed border-neutral-200 dark:border-neutral-700 pt-12">
+      <p class="text-base text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
+        Cada fase se cierra con tu aprobación. La primera conversación es de diagnóstico, sin compromiso.
+      </p>
+      <Button url="mailto:hola@glsolutions.tech" type="outline" className="text-base px-6 py-3">
+        Escríbenos para empezar
+      </Button>
     </div>
   </section>
 
