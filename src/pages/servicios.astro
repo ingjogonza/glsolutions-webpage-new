@@ -1,5 +1,4 @@
 ---
-import PageHeader from "@/components/elements/PageHeader.astro";
 import AccordionItem from "@/components/ui/AccordionItem.astro";
 import Button from "@/components/ui/Button.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -126,13 +125,15 @@ const serviceNames = [
 
 <Layout
   title="Servicios de consultoría de software y Spec Driven Development | GL Solutions"
-  description="5 líneas de servicio: Ejecución, Rescate, Automatización, Consultoría y CTO Fraccionado. Rango USD 1.500–32.000. Escríbenos para cotizar."
+  description="5 líneas: Ejecución, Rescate, Automatización, Consultoría y CTO Fraccionado. Rango USD 1.500–32.000. Escríbenos a hola@glsolutions.tech y cotizamos tu caso."
 >
-  <section class="site-container my-12">
-    <PageHeader
-      title="Servicios"
-      description="5 líneas de trabajo. Cada una con alcance, precio y duración claros antes de empezar."
-    />
+  <section class="site-container my-12 md:my-16">
+    <h1 class="max-w-3xl font-brand text-4xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100 sm:text-5xl lg:text-6xl">
+      Servicios
+    </h1>
+    <p class="mt-5 max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
+      5 líneas de trabajo. Cada una con alcance, precio y duración claros antes de empezar.
+    </p>
   </section>
 
   <section class="site-container mb-12" data-aos="fade-up-xs" data-aos-once="true">
