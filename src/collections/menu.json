@@ -1,7 +1,7 @@
 [
 	{ "name": "Inicio", "url": "/" },
-	{ "name": "Metodología", "url": "/features" },
-	{ "name": "Servicios", "url": "/pricing" },
+	{ "name": "Metodología", "url": "/metodologia" },
+	{ "name": "Servicios", "url": "/servicios" },
 	{ "name": "Blog", "url": "/blog" },
 	{ "name": "Sobre nosotros", "url": "/about" },
 	{ "name": "Contacto", "url": "/contact" }
